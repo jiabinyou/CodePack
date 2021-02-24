@@ -22,4 +22,45 @@ public class A_BS_Step {
      *      一定有res: 输出一定是T[left]  ||  T[right]
      *      不一定有res: 如果post-process没找到符合要求结果，输出corner case output / throw exception
      */
+
+
+
+    /**不会死循环的通用模板*/
+    int binarySearch(int[] nums, int target) {
+        // corner case 处理
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+
+
+        int left = 0;
+        int right = nums.length - 1;
+
+        // 要点1: start + 1 < end
+        while (left  < right - 1) {
+            // 要点2：start + (end - start) / 2
+            int mid = left + (right - left) / 2;
+            // 要点3：=, <, > 分开讨论，mid 不 +1 也不 -1
+            if (nums[mid] == target) {
+                return mid;
+            } else if (nums[mid] < target) {
+                left = mid;
+            } else {
+                right = mid;
+            }
+        }
+
+        // 要点4: 循环结束后，单独处理start和end
+        if (nums[left] == target) {
+            return left;
+        }
+        if (nums[right] == target) {
+            return right;
+        }
+        return -1;
+    }
+
 }
+
+
+

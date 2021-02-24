@@ -10,7 +10,9 @@ package String;
  *      String s = Arrays.toString(array);   //转换int[]
  *
  * String 与 int：
- *      String s = String.valueOf(i);  //int i
+ *      String s = String.valueOf(num);  //int i
+ *      int num = Integer.valueOf(s);
+ *      long num = Long.valueOf(s);
  *
  * char 与 int:
  *      char - '0' = int;  //拿到与字面相同的int值，比如char '9' 转化成 int '9'
@@ -30,14 +32,14 @@ package String;
 /**
  * char和string的常用API:
  *      s = s.trim();
- *      s = s.toLowerCase();
- *
  *      s.substring(begin, end);    //[begin, end)
  *      Character.isDigit(c);        //char c
  *      Character.isLetterOrDigit(C);
  *      Character.isLowerCase(c);
  *      Character.isUpperCase(c);
  *      s.contains(s1);           //注意！！string也有查找功能
+ *      boolean s.startsWith(str);  // substring str， 查找str是否是s的prefix
+ *      boolean s.startsWith(str, beginIdx);  //查找str是否是s从beginIdx开始的的prefix
  */
 
 /**
@@ -55,13 +57,15 @@ package String;
  *      }
  *      《==》
  *      s = s.toUpperCase();
- *
+ *      char array[idx] = Character.toUpperCase();
+ *      *
  * 大写转小写：
  *      if (c >= 'A' && c <= 'Z') {
  *            c += 32;
  *      }
  *      《==》
  *      s = s.toLowerCase();
+ *      char array[idx] = Character.toLowerCase();
  */
 
 

@@ -31,3 +31,32 @@ public class BinaryTreeLevelOrderTraversal {
         return res;
     }
 }
+
+/**
+ * Sol2.DFS
+ * */
+class BinaryTreeLevelOrderTraversalSol2 {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        //sanity check
+        if (root == null) {
+            return res;
+        }
+        dfs(root, 0, res);
+        return res;
+    }
+
+    private void dfs(TreeNode root, int level, List<List<Integer>> res) {
+        //base case
+        if (root == null) {
+            return;
+        }
+        if (level >= res.size()) {
+            res.add(new ArrayList<>());
+        }
+        res.get(level).add(root.val);
+        //recursion
+        dfs(root.left, level + 1, res);
+        dfs(root.right, level + 1, res);
+    }
+}
