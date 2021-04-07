@@ -182,6 +182,7 @@ class SolPAW3 {
         return res;
     }
 
+    //checkForPacific代表的是，决定kbfs加入的初始node是pacific的，还是atlatic的
     private void bfs(int[][] matrix, boolean[][] visited, boolean checkForPacific) {
         int m = matrix.length;
         int n = matrix[0].length;

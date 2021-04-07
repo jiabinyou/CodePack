@@ -12,7 +12,7 @@ class SolLIS1 {
         }
         int longest = 1;
         for (int i = 1; i < nums.length; i++) {
-            longest = Math.max(longest, pureRecursion(nums, i));
+            longest = Math.max(longest, pureRecursion(nums, i)); //以每个点为起点组dfs，unconnected graph
         }
         return longest;
     }
@@ -82,6 +82,17 @@ class SolLIS2{
  * 这样的逻辑是不对的，因为dp[i]会被更新多次，当第2， 3次更新的时候，
  * 当前dp[i]如果没有之前长，应该保留之前的长度，不能再更细成1
  */
+
+/**
+dp[i] : the longest increasing subsequence from index 0 to index i
+induction rule:
+   each index j from 0 to i, if (nums[i] > nums[j])
+    dp[i] = Math.max(dp[j] + 1, dp[i]);
+base case:
+    dp[i] = 1  （所有位置的base case都是1）
+res:
+    max(dp[i])
+*/
 public class LongestIncreasingSubsequence {
     public int lengthOfLIS(int[] nums) {
         //sanity check

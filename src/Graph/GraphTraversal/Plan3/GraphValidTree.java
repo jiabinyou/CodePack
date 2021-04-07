@@ -1,8 +1,5 @@
 package Graph.GraphTraversal.Plan3;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * //An undirected graph is a tree if it satisfies 2 of the below 3 conditions
@@ -10,10 +7,86 @@ import java.util.Set;
  * //2. connected
  * //3. |E| = |V| - 1
  */
+
+/**Sol10 : check |E| = |V| - 1 和 no cycle条件
+ * Union Find to check if a conneted graph
+ * */
+class GraphValidTreeSol0 {
+    /**
+     * @param n: An integer
+     * @param edges: a list of undirected edges
+     * @return: true if it's a valid tree, or false
+     */
+    public boolean validTree(int n, int[][] edges) {
+        //sanity check
+        if (edges == null) {
+            return false;
+        }
+
+        //check |E= == |V| - 1
+        if (edges.length != n - 1) {
+            return false;
+        }
+
+        //check if a connected graph (UF)
+        UnionFind uf = new UnionFind();
+        for (int i = 0; i < n; i++) {
+            uf.add(i);
+        }
+        for (int[] edge : edges) {
+            uf.union(edge[0], edge[1]);
+        }
+        return uf.numOfSet == 1;
+    }
+
+
+    static class UnionFind {   /**推荐将class UnionFind写成static，放在大class内的用法，这样obj就可以直接调用class UnionFind的函数和field*/
+    private Map<Integer, Integer> father;
+        private int numOfSet = 0;
+        public UnionFind() {
+            father = new HashMap<Integer, Integer>();
+            numOfSet = 0;
+        }
+
+        public void add(int x) {
+            if (father.containsKey(x)) {
+                return;
+            }
+            father.put(x, null);
+            numOfSet++;
+        }
+
+        public void union(int x, int y) {
+            int rootX = find(x);
+            int rootY = find(y);
+            if (rootX != rootY) {
+                father.put(rootX, rootY);
+                numOfSet--;
+            }
+        }
+
+        public int find(int x) {
+            int root = x;
+            while (father.get(root) != null) {
+                root = father.get(root);
+            }
+            while (x != root) {
+                int originalFather = father.get(x);
+                father.put(x, root);
+                x = originalFather;
+            }
+            return root;
+        }
+    }
+}
+
+
+
+
 /**
  * Sol1: check |E| = |V| - 1 和 no cycle条件
  * traverse vertex， 并且需要V ds, 记录0到n-1这些graph node中的遍历情况
- * boolean[] visited
+ * -->boolean[] visited
  */
 public class GraphValidTree {
     public boolean validTree(int n, int[][] edges) {
