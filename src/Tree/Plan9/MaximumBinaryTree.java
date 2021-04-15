@@ -6,7 +6,10 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 /**
- * Sol1. O(N^2)
+ * Sol1. recursion
+ *
+ * TC: O(Nlogn)  -->假设树高logn
+ * SC: O（logn）
  */
 public class MaximumBinaryTree {
     public TreeNode constructMaximumBinaryTree(int[] nums) {
@@ -24,8 +27,10 @@ public class MaximumBinaryTree {
         }
         int maxIdx = findMax(nums, l, r);
         TreeNode root = new TreeNode(nums[maxIdx]);
+        //move down + connect
         root.left = construct(nums, l, maxIdx - 1);
         root.right = construct(nums, maxIdx + 1, r);
+        //return val
         return root;
     }
 
