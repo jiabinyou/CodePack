@@ -3,16 +3,12 @@ package DP.TrainingPlan.Plan2;
 /**
  int[i][j]: the #paths from[0][0] to [i][j]
  //base case
- [0][0]第一列只能往下走，所以一种
- [0][0]到第一行只能往右走，所以一种
- //induction rule
- 站在[i][j],上一步可以来自于left或者top方向
- 即
+ dp[i][0] = 1; //[0][0]第一列只能往下走，所以一种
+ dp[0][j] = 1; //[0][0]到第一行只能往右走，所以一种
+ //induction rule :站在[i][j],上一步可以来自于left或者top方向,即
  dp[i][j] = dp[i][j - 1] + dp[i - 1][j]
- //order
- 只能t->b， l->r
- //Res
- return dp[m - 1][n - 1];
+ //order:只能t->b， l->r
+ //Res:return dp[m - 1][n - 1];
  */
 public class UniquePaths {
     public int uniquePaths(int m, int n) {

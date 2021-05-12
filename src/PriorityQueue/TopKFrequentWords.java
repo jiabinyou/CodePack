@@ -2,10 +2,19 @@ package PriorityQueue;
 
 import java.util.*;
 
-/**
- * TC: O(KLOGN)
- * SC:O(K)
- * */
+/** Sol.可以使用"相反"PQ，求kth largest用minHeap （就是top k问题）
+ * 简历freq map，将freq使用size = k的minHeap维护起来（minHeap按照频率大小排序），
+ * 将map entry一一放入minHeap中，size > k 时候，就将顶部元素移出，最后留在minheap中的就是freq top k elements
+ * TC:
+ * minHeap: O(nlogk)-》假设共有n个word
+ * build freqmap: o(n)
+ *  -》O(nlogk)
+ *
+ * SC:
+ * minheap： o(k)
+ * freqMap:worst o(n)
+ * ->o(n)
+ */
 public class TopKFrequentWords {
     public List<String> topKFrequent(String[] words, int k) {
         List<String> res = new ArrayList<>();

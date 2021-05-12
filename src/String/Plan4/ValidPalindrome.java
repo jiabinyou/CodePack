@@ -1,6 +1,10 @@
 package String.Plan4;
 
 /**
+ * Clarify:
+ * 包括什么，字母，数字，还是都有？
+ * 大小写是否都有，A uppercase是否可以对应a lowercase？
+ *
  * 难点1：
  * 如果想用pointers，就必须先转成大写或者小写，因为如果不一致，'A' 和 'a'就返回false了
  * 难点2：

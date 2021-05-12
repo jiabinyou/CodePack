@@ -16,6 +16,24 @@ import java.util.List;
  * 每层build branch方法： traverse all branch candidate， all valid col which can put chess，is a valid branch
  *                       即站在每一层，遍历所有列，找到那些放棋子valid的列，建立branch，进入下一层recursion
  */
+/**
+ Sol.DFS
+ This is a graph problem, each position is a graph node.
+ To solve this problem, we can use epth first search to try all ways that quees can be settled then return all res.
+ In the depth first search:
+ level ： each row i is a dfs level
+ branch:  for each col j, check if pos[i][j] coul be put a queen
+ (do not have prev queen in col j, diagnal) -> memo
+ base case: row idx = n, means each row already has a queen
+
+ do not need mark visitd: cause we traverse row for top to bottom, col from left to right
+ do not have possibility to repetitively traverse the graph node
+
+ TC: O(n!)
+          因为共n个queen，第一个有n种可能，第二个有n-2种可能(排除同col和对角线),第三个有n-4种可能
+          所以是O（n * (n - 2) * (n - 4） *...1) = O(n!)
+ SC: O(N) to keep an information about diagonals and rows.
+ */
 public class NQueens {
     public List<List<String>> solveNQueens(int n) {
         List<List<String>> res = new ArrayList<>();
@@ -49,6 +67,9 @@ public class NQueens {
         for (int prevRow = 0; prevRow < curRow; prevRow++) {
             int prevCol = usedCol.get(prevRow);
             //有一个false就返回false
+            /**难点：这里对角线不止是正负最长的对角线，所以不能用r == c || r == n - c - 1来检查，是不够的，
+             需要Math.abs(i - r) == Math.abs(j - c)
+             */
             if (prevCol == curCol || (Math.abs(prevCol - curCol) == Math.abs(prevRow - curRow))) {
                 return false;
             }

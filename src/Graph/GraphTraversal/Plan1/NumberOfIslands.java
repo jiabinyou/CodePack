@@ -13,6 +13,9 @@ import java.util.Queue;
  *题目本质：想想看，这道题其实就是FloodFill，只不过那道题必须要求在graph本身做出改变，就相当于在graph本身mark visited了
  *         所以不需要独立的V ds
  *         这道题，也可以做boolean[][] visited，但是其实没有必要浪费空间，因为也完全可以利用自身mark visited
+ *
+ * TC:O(m*n)
+ * SC:WORST CASE O(m*n)
  */
 public class NumberOfIslands {
     private static final int[][] DIRS = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};

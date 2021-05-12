@@ -3,7 +3,20 @@ package Graph.BFS1.Plan1;
 import java.util.*;
 
 /**
- * Graph.BFS1 find SD
+ * Graph.BFS1 find shortest distance
+ * This is a graph problem. each word is the wordList, including the beginWord, endWord. There is an edge between
+ * two nodes if there are two words only contains one character difference.
+ * To solve this problem, we can use bread first search, start from beginWord, along the graph we build, to find
+ * if there is a shortest path between beginWord and endWord.
+ *
+ * TC:
+ * 1.BFS PROCESS:O(|V| + |E|) , V--#words,假设m,假设每个word长度为n  E: ~#words   -》则这一步o(m*n + m) ~ o(m*n)
+ * 2.for each word, traverse the whole word to check if there is next step,说明对弈每个V，都需要再花费O(N)
+ * -->所以总共在一起：O(M ×N^2)
+ * SC:
+ * 1.BFS PROCESS: O(|V| + |E|)，同样queue装下O(|V| + |E|)需要o(m*n + m) ~ o(m*n)
+ * 2.fir each word，还需要存储n个transformation-》O(N)
+ * ->所以总共在一起：O(M ×N^2)
  *
  * 有前提：all edge weights equal
  * 之所以能使用BFS1去找shortest path，在第一个expand或者generate node的时候就mark visit，

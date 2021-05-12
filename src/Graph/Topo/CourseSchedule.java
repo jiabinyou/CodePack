@@ -3,6 +3,26 @@ import java.util.*;
 
 /**
  * Sol1. DFS2'V'
+ * This is a graph problem, we can regard each course as a graph node. There is a directed edge between the course and its
+ * prerequisites course. To solve this problem, first we can build the graph, then use the depth first search
+ * to check if there is cycle in the graph. If there is ni cycle, ,means all course could be finished.
+ *
+ * TC: O(∣E∣+∣V∣) where |V| is the number of courses, and |E|is the number of dependencies.
+ * SC: O(∣E∣+∣V∣)
+ *
+ * 过例子：
+ * 6
+ * [[1,0],[2,3],[4,5],[1,4]]
+ * build graph:
+ * map: <0, 1><2,3><4,5><1,4>
+ * graph node:          0    2
+ *                    /     /
+ *                   1     3
+ *                  /
+ *                 4
+ *                /
+ *               5
+ *
  */
 public class CourseSchedule {
     public boolean canFinish(int numCourses, int[][] prerequisites) {

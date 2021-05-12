@@ -1,5 +1,10 @@
 package HashMap;
 
+/**
+ *  * Clarify:
+ *  * 包括什么，字母，数字，还是都有？
+ *  * 大小写是否都有，A uppercase是否可以对应a lowercase？
+ * */
 public class LongestPalindrome {
     public int longestPalindrome(String s) {
         //sanity check

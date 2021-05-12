@@ -2,6 +2,10 @@ package LinkedList.Plan3;
 
 import LinkedList.ListNode;
 
+/**Sol:two pointer,谁小移谁
+ * TC:O(M + N)
+ * SC:O(1)
+ * */
 public class MergeTwoSortedLists {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         //sanity check

@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 
-/**
- * k pointers, 谁小移谁
- * 可以使用minHeap管理K个linkedlist head，当做是k pointer，
- * 方便每次poll出下一个值最小的pointer
+/**Sol2.minHeap， 原理：k pointers, 谁小移谁
+ * 初始将所有数组的首个元素入minHeap, 并记录入堆的元素是属于哪个数组的.
+ * 每次取出堆顶元素, 并放入该元素所在数组的下一个元素.
+ * TC: minHeap长度为K，假设共有N个数字，是O(NLOGK)
+ * sc:O(K)
  * */
 public class MergeKSortedLists {
     public ListNode mergeKLists(List<ListNode> lists) {

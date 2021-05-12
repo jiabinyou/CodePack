@@ -3,6 +3,42 @@ import java.util.*;
 /**
  * Sol1. DFS2  -->解法仍然有问题
  * 这道题在1的基础上，还需要recover path
+ *
+ * This is a graph problem, we can regard each course as a graph node. There is a directed edge between the course and its
+ * prerequisites course. To solve this problem, first we can build the graph, then use the depth first search
+ * to check if there is cycle in the graph. If there is ni cycle, ,means all course could be finished.
+ * recover path:
+ * when the graph node has no cycle, we record this graph node as one step in our path. When depth first search finished,
+ * recover the whole path from our recorded memo.
+ *
+ *  TC: O(∣E∣+∣V∣) where |V| is the number of courses, and |E|is the number of dependencies.
+ *  SC: O(∣E∣+∣V∣)
+ *
+ * 过例子：
+ * 6
+ * [[0,1],[2,3],[4,5],[1,4]]
+ * build graph:
+ * map: <0, 1><2,3><4,5><1,4>
+ * graph node:         0     2
+ *                    /     /
+ *                   1     3
+ *                  /
+ *                 4
+ *                /
+ *               5
+ * dfs node         hasCycle?     res
+ *    0
+ *    1    2
+ *    4    3
+ *    5
+ *   (return)
+ *    5                 N          5
+ *    4                 N          54
+ *    1                 N          541
+ *    0                 N          5410
+ *
+ *    3                 N          54103
+ *    2                 N          541032
  */
 public class CourseScheduleII {
     public int[] findOrder(int numCourses, int[][] prerequisites) {
@@ -43,7 +79,7 @@ public class CourseScheduleII {
             }
         }
         visited[node] = true;
-        result.add(node);
+        result.add(node);  /**当且仅当符合node符合topo logical，才加入path中*/
         return true;
     }
 
@@ -115,3 +151,4 @@ class SolCSII2 {
         return graph;
     }
 }
+

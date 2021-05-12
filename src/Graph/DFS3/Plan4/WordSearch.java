@@ -1,5 +1,21 @@
 package Graph.DFS3.Plan4;
 
+
+/**Sol.dfs3
+ * 这是一个graph问题，board上每个位置是一个graph node，每个点之间，凡是可以走的，上下左右的四个方向，都是edge
+ * To solve this problem, we can use depth first search to find if the given word is a path in the graph.
+ * DEF
+ * level：word上，每走一步的index是一层level
+ * branch：四个方向，有四个branch
+ * base case：当index == word.length - 1,说明找到了
+ *
+ * TC:O(b^v),   b: 4,v: word length(assume K)
+ * -->O(4^K)
+ * SC:
+ * 1.recursion call stack: >O(word length) = O(K)
+ * 2.mark visit: O(M*N)
+ * 谁大取谁
+ * */
 public class WordSearch {
     private static final int[][] DIRS = new int[][] {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
     public boolean exist(char[][] board, String word) {

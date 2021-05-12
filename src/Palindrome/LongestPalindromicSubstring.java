@@ -1,6 +1,11 @@
 package Palindrome;
 
-/**解法：DP*/
+/**
+ *  * Clarify:
+ *  * 包括什么，字母，数字，还是都有？
+ *  * 大小写是否都有，A uppercase是否可以对应a lowercase？
+ *
+ * 解法：DP*/
 /**因为这道题求的是substring，是连续的，所以我们只需要记录下glbLongest的start idx即可恢复path，不需要用到DP recover path*/
 /** boolean dp[i][j] :Substring within arr[i, j] is panlindrome or not
  *
@@ -9,12 +14,15 @@ package Palindrome;
  *
  * base case:
  * if i == j  --> dp[0][0] = 0;
- * if j - i = 1  --> dp[i][j] = A[i] == A[j]
+ * if j - i = 1  --> dp[i][j] = (A[i] == A[j])
  *
  * res: 这道题要返回path，所以记录glbLongest和startIdx即可
  *
  * filling order:
  * (i)从右到左，(j)从上到下
+ *
+ * TC:O(N^2)
+ * SC:O(N^2)
  */
 
 

@@ -5,6 +5,46 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/** Sol.TrieTree
+ * 1.将待查找的单词储存在字典树Trie中。每个trie node存储的信息为：boolean isWord, Map<Character, TrieNode> children;
+ * 2.使用DFS在board中查找，利用字典树进行剪枝:
+ *   如果dfs的下一层所查找的字母在trie中存在，该path就继续往下走继续查找；
+ *   如果dfs的下一层所查找的字母在trie中不存在，说明该path无效，直接返回；
+ *
+ * TC:
+ * m x n matrix
+ * s - size of the dictionary
+ * k - average length of a word
+ * 1.make a trie with a cost of O(s x k)
+ * 2.dfs:o(4^k),对mn个node进行backTRacking
+ * -->最终O(m x n x 4^k)
+ *
+ * SC:
+ * 1.trie 存储all word ： o(s*k)
+ * 2.backTracking call stack: K
+ * -->最终o(s*k)
+ * e.g.
+ * words = ["oath","pea","eat","rain"]
+ * board = [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]],
+ *
+ * trie：
+ *
+ *           o  /     p/   e /      r/
+ *            []     []     []      []
+ *         a /     e /     a/     a /
+ *         []       []     []      []
+ *      t /       a /     t /    i /
+ *      []                        []
+ *   h /                         n /
+ *    []
+ *
+ *
+ * ["o","a","a","n"]
+ * ["e","t","a","e"]
+ * ["i","h","k","r"]
+ * ["i","f","l","v"]
+ * */
+
 public class WordSearchII {
     private static final int[][] DIRS = new int[][]{{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
     public List<String> findWords(char[][] board, String[] words) {

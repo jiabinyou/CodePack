@@ -9,6 +9,29 @@ public class ThreeSum {
      保证input sorted后才能够使用pointers
      此题input dup，res无dup
      3 sum，需在k，（i， j）两个维度dedup
+
+     TC:O(NLOGN) + o(n)  -->因为需要sort
+     SC: --》根据选用的sort决定
+
+
+     e.g.
+     numbers = [-1,0,1,2,-1,-4]
+     sort后：
+     -4    -1    -1    0    1    2      res
+p    i     j     k
+
+     i           j     k
+           i     j     k
+
+     i                 j    k
+           i           j    k           <-1, 0, 1>
+
+     i                      j    k
+          i                 j    k
+          i           j          k
+          i      j               k     <-1, 0, 1><-1, -1, 2>
+
+
      */
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();

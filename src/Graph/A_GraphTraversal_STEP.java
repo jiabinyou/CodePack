@@ -1,5 +1,7 @@
 package Graph;
 
+//https://docs.google.com/document/d/1__bH23SN6oQHkkcAhenwfZxjJhKIREZS-v9LLbrynyQ/edit#
+
 /**graph的两种表现形式
  * 1.adjcency matrix ：查找，删除在o(1)搞定，但空间复杂度高
  * 2.adjacent list ：所用空间少，但是 查找，删除比较费时间

@@ -3,6 +3,40 @@ import java.util.*;
 /**
  * Solution 1:Graph.BFS1 find SD, DFS recover all path
  *
+ * step 1.BFS find shortest distance
+ * This is a graph problem. each word is the wordList, including the beginWord, endWord. There is an edge between
+ * two nodes if there are two words only contains one character difference.
+ * To solve this problem, we can use bread first search, start from beginWord, along the graph we build, to find
+ * if there is a shortest path between beginWord and endWord.
+ * step 2. prepare for recover path
+ * In each step of BFS, we need to record :
+ * 1.all previous step for cur node, use Map<String,List<String> : cur node, List<prevNode>
+ * 2.all nodes and its level when we meet it: Map<String, Integer> : node, level
+ * to record all prev node information and its level information
+ * for the nei ode we meet first time : record the nei node and its parent into prevMap(假设此时层数是level + 1)
+ * for the node we meet not the first time, only the node appear again at level + 1, we will record its parent node into prevMap
+ * step 3.recover path
+ * use depth first search on prev map to recover all shortest path
+ *
+ * TC:
+ *  1.BFS PROCESS:O(|V| + |E|) , V--#words,假设m,假设每个word长度为n  E: ~#words   -》则这一步o(m*n + m) ~ o(m*n)
+ *  2.for each word, traverse the whole word to check if there is next step,说明对弈每个V，都需要再花费O(N)
+ *  3.DFS recover path:
+ *  * -->所以总共在一起：O(M ×N^2)
+ *
+ * e.g.
+ * beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log","cog"]
+ *                                  level                     prevMap
+ *                  hit             <hit,0>                 <hit, null>
+ *                   /
+ *                  hot             <hot,1>                 <hot, hit>
+ *              /       \
+ *            dot      lot          <dot, 2><lot,2>         <dot, hot><lot, hot>
+ *          /   \      /  \
+ *        lot  dog   log   dot      <dog, 3><log, 3>         <dog, dot><log,lot>
+ *        /    /     / \    /
+ *      log  cog  dog  cog  dog     <cog,4>                  <cog, <dog, log>>
+ *
  * 有前提：all edge weights equal
  * 之所以能使用BFS1去找shortest path，在第一个expand或者generate node的时候就mark visit，
  * 那么从init到达goal所用的一定是最小的level，而level就能够直接反映出path weights。

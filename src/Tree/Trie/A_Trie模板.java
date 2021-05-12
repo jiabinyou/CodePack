@@ -6,14 +6,42 @@ public class A_Trie模板 {
 
 }
 
-/**
- * 使用条件：
- * 1.需要查询包含某个前缀的单词/字符串是否存在
- * 2.字符矩阵中找单词的问题
- * <p>
- * TC: O(L) 增删查改
+/**TrieTree字典树：又名前缀树，是一种哈希树的变种,其优点在于可以高效查询前缀
+ * Trie tree的根本优点：空间换时间
+ *
+ * 字典树的基本操作
+ *      插入单词
+ *      前缀计数
+ *      查找单词
+ *      查找前缀
+ * 字典树的题型
+ *     1.直接操作字典树 e.g.判断前缀、单词是否存在于字典中   (基本操作)
+ *     2.在字典树上dfs     (题目较多，难度偏高)
+ *     3.使用字典树加速其他算法，利用其高效查询前缀、单词的优势，优化其他算法
+ *
+ * TC: O(L) （包括insert, delete, search, update，即增删查改）
  * SC: O(N * L)       -> N 是单词数,L 是单词⻓度
  */
+
+/**TrieTree基本结构 【与常见的树型结构最大的不同：edge表示字母】
+ *                                         [*fake root*]
+ *                          a /                                   \b
+ *                          [ ]                                   [ ]
+ *                  a/               \b                   a/                   \c
+ *                [ ]                [ ]                 [ ]                   [ ]
+ *           b/         \d         /c     \f         c/       \d           e/      \f
+ *         [ ]          [ ]     [ ]       [ ]       [ ]       [ ]
+ *        c/
+ *       []
+ * 这里比较容易出现的误区是：
+ * e.g. aabc, abc,从上图可以看出来属于两个完全不同的branch，因为我们要保证的是每个word的开头字母在trie tree上都应该是root的位置
+ *      不要想当然以为这两个word中的共同substring"abc"属于共用同一个branch。
+ *
+ * 小细节：
+ * trie tree本质是个字典，就是先存储是为了加快查询，这点和map很像。但是在hashcollision小的情况下，建立map要比trietree，查询速度更快。
+ * hash collision小的话，map的查询还是要比o(n)小的，然后trie tree是稳定在o(n)。
+ * */
+
 class TrieNode {
     // 所有的儿子节点
     public Map<Character, TrieNode> sons;
